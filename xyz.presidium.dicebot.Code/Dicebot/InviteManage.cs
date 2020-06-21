@@ -10,7 +10,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot
     {
         public InviteResult HandleInvite(long fromQQ, string msg)
         {
-            if (msg == "2333")
+            if (msg.Contains("2333"))
             {
                 return InviteResult.Approved;
             }

@@ -8,7 +8,7 @@ using Native.Sdk.Cqp.Interface;
 
 namespace xyz.presidium.dicebot.Code.CQEvents
 {
-    class MessageHandler : IPrivateMessage, IGroupMessage
+    public class MessageHandler : IPrivateMessage, IGroupMessage
     {
         public void GroupMessage(object sender, CQGroupMessageEventArgs e)
         {
@@ -17,7 +17,8 @@ namespace xyz.presidium.dicebot.Code.CQEvents
 
         public void PrivateMessage(object sender, CQPrivateMessageEventArgs e)
         {
-            throw new NotImplementedException();
+            e.FromQQ.SendPrivateMessage(e.Message);
+            e.Handler = true;
         }
     }
 }
