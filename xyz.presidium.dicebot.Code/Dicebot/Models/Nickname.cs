@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace xyz.presidium.dicebot.Code.Models
+namespace xyz.presidium.dicebot.Code.Dicebot.Models
 {
     [Table("nickname")]
-    class Nickname
+    public class Nickname
     {
         public int Id { get; set; }
 
