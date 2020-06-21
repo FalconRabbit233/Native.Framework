@@ -5,11 +5,11 @@
 {
 	"ret": 1,
 	"apiver": 9,
-	"name": "酷Q样例应用 for C#",
+	"name": "骰子机2020",
 	"version": "1.0.0",
 	"version_id": 1,
-	"author": "JieGG",
-	"description": "酷Q样例应用(V9应用机制)",
+	"author": "uranus_r",
+	"description": "骰子机2020描述",
 	"event": [
 		{
 			"id": 1,
@@ -117,25 +117,25 @@
 			"function": "_eventDisable"
 		}
 	],
-	"menu": [ // 设置菜单（发布前请删除无用菜单，如果无需设置菜单请全部删除）
-		{
-			"name": "设置A", //菜单名称
-			"function": "_menuA" //菜单对应函数
-		},
-		{
-			"name": "设置B",
-			"function": "_menuB"
-		}
-	],
-	"status": [ // 悬浮窗状态（见 com.example.status 样例）
-		{
-			"id": 1, // 悬浮窗ID
-			"name": "运行时间", // 名称
-			"title": "UPTIME", // 英文名称
-			"function": "_statusUptime", // 数据更新对应函数
-			"period": "1000" // 更新间隔（单位ms（毫秒），目前仅支持1000ms（1秒））
-		}
-	],
+	//"menu": [ // 设置菜单（发布前请删除无用菜单，如果无需设置菜单请全部删除）
+	//	{
+	//		"name": "设置A", //菜单名称
+	//		"function": "_menuA" //菜单对应函数
+	//	},
+	//	{
+	//		"name": "设置B",
+	//		"function": "_menuB"
+	//	}
+	//],
+	//"status": [ // 悬浮窗状态（见 com.example.status 样例）
+	//	{
+	//		"id": 1, // 悬浮窗ID
+	//		"name": "运行时间", // 名称
+	//		"title": "UPTIME", // 英文名称
+	//		"function": "_statusUptime", // 数据更新对应函数
+	//		"period": "1000" // 更新间隔（单位ms（毫秒），目前仅支持1000ms（1秒））
+	//	}
+	//],
 	"auth": [ // 应用权限（发布前请删除无用权限）
 		//20,  //[敏感]取Cookies    getCookies / getCsrfToken
 		//30,  //接收语音           getRecord
