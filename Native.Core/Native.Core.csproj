@@ -131,6 +131,10 @@
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>Native.Sdk</Name>
     </ProjectReference>
+    <ProjectReference Include="..\xyz.presidium.dicebot.Code\xyz.presidium.dicebot.Code.csproj">
+      <Project>{7165ca8f-bd5e-4df3-bf74-f6c362c2928f}</Project>
+      <Name>xyz.presidium.dicebot.Code</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ImportGroup Label=".NET DllExport">

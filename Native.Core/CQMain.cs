@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Native.Sdk.Cqp.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity;
+using xyz.presidium.dicebot.Code.CQEvents;
+using xyz.presidium.dicebot.Code.Dicebot;
 
 namespace Native.Core
 {
@@ -18,7 +21,9 @@ namespace Native.Core
 		/// <param name="container">用于注册的 IOC 容器 </param>
 		public static void Register (IUnityContainer unityContainer)
 		{
-			
+			unityContainer
+				.RegisterType<BotCore>()
+				.RegisterType<IFriendAddRequest, FriendsHandler>("好友添加请求处理");
 		}
 	}
 }
