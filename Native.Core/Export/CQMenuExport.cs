@@ -29,5 +29,16 @@ namespace Native.App.Export
 		}	
 		#endregion	
 		
+		#region --私有方法--	
+		/// <summary>	
+		/// 读取容器中的注册项, 进行事件分发	
+		/// </summary>	
+		private static void ResolveBackcall ()	
+		{	
+		}	
+		#endregion	
+		
+		#region --导出方法--	
+		#endregion	
 	}	
 }
