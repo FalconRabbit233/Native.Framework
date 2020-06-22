@@ -12,12 +12,13 @@ namespace xyz.presidium.dicebot.Code.CQEvents
     {
         public void GroupMessage(object sender, CQGroupMessageEventArgs e)
         {
-            throw new NotImplementedException();
+            bot.RecieveMessage(e.FromQQ, e.Message, e.FromGroup.SendGroupMessage, e.FromGroup);
+            e.Handler = true;
         }
 
         public void PrivateMessage(object sender, CQPrivateMessageEventArgs e)
         {
-            e.FromQQ.SendPrivateMessage(e.Message.Text);
+            bot.RecieveMessage(e.FromQQ, e.Message, e.FromQQ.SendPrivateMessage);
             e.Handler = true;
         }
     }

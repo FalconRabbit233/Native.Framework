@@ -29,6 +29,7 @@ namespace Native.Core
 
             unityContainer
                 .RegisterInstance(conn)
+                .RegisterType<IGroupMessage, MessageHandler>("群消息处理")
                 .RegisterType<IPrivateMessage, MessageHandler>("私聊消息处理")
                 .RegisterType<IFriendAddRequest, FriendsHandler>("好友添加请求处理");
         }

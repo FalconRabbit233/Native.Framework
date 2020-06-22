@@ -7,19 +7,13 @@ using xyz.presidium.dicebot.Code.Dicebot.Sqlite;
 
 namespace xyz.presidium.dicebot.Code.Dicebot.Models
 {
-    [Table("nickname")]
-    public class Nickname
+    [Table("super_admin")]
+    class SuperAdmin
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [Column("from_group")]
-        public long FromGroup { get; set; }
-
-        [Column("from_qq")]
-        public long FromQQ { get; set; }
-
-        [Column("nickname")]
-        public string NicknameValue { get; set; }
+        [Column("qq")]
+        public long QQNumber { get; set; }
     }
 }
