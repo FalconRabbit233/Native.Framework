@@ -57,7 +57,7 @@ using Sqlite3Statement = System.IntPtr;
 
 #pragma warning disable 1591 // XML Doc Comments
 
-namespace SQLite
+namespace xyz.presidium.dicebot.Code.Dicebot.Sqlite
 {
 	public class SQLiteException : Exception
 	{

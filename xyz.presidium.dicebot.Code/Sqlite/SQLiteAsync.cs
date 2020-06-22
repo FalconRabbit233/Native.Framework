@@ -28,7 +28,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SQLite
+namespace xyz.presidium.dicebot.Code.Dicebot.Sqlite
 {
 	/// <summary>
 	/// A pooled asynchronous connection to a SQLite database.
