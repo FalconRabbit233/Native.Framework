@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,7 +67,10 @@
     <Compile Include="CQEvents\FriendsHandler.cs" />
     <Compile Include="CQEvents\MessageHandler.cs" />
     <Compile Include="Dicebot\BotCore.cs" />
+    <Compile Include="Dicebot\Controllers\NicknameController.cs" />
     <Compile Include="Dicebot\InviteManage.cs" />
+    <Compile Include="Dicebot\MessageRoute.cs" />
+    <Compile Include="Dicebot\Models\Nickname.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sqlite\SQLite.cs" />
     <Compile Include="Sqlite\SQLiteAsync.cs" />
