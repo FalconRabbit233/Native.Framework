@@ -17,7 +17,7 @@ namespace xyz.presidium.dicebot.Code.CQEvents
 
         public void PrivateMessage(object sender, CQPrivateMessageEventArgs e)
         {
-            e.FromQQ.SendPrivateMessage(e.Message);
+            e.FromQQ.SendPrivateMessage(e.Message.Text);
             e.Handler = true;
         }
     }
