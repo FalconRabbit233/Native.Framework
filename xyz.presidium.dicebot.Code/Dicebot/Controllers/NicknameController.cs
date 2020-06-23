@@ -30,19 +30,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
 
             string replySuffix;
             Func<long, long> modifyGroup;
-
-            switch (commandResult.Groups[1].Length)
-            {
-                case 2:
-                    replySuffix = "在此处的";
-                    modifyGroup = g => fromGroup.Id;
-                    break;
-                default:
-                case 1:
-                    replySuffix = "的全局";
-                    modifyGroup = g => 0;
-                    break;
-            }
+            bool recordExists;
 
             var nicknameAfter = commandResult.Groups[2].Value;
 
@@ -50,13 +38,28 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
             var nicknameBefore = nickname.NicknameValue;
             nickname.NicknameValue = nicknameAfter;
 
+            switch (commandResult.Groups[1].Length)
+            {
+                case 2:
+                    replySuffix = "在此处的";
+                    modifyGroup = g => fromGroup.Id;
+                    recordExists = nicknameExists;
+                    break;
+                default:
+                case 1:
+                    replySuffix = "的全局";
+                    modifyGroup = g => 0;
+                    recordExists = context.Table<Nickname>()
+                        .Count(n => n.FromGroup == 0 && n.FromQQ == fromQQ.Id) > 0;
+                    break;
+            }
+
             nickname.FromGroup = modifyGroup(nickname.FromGroup);
 
-            Func<object, int> updateMethod = nicknameExists ?
-                (Func<object, int>)context.Update :
-                (Func<object, int>)context.Insert;
-
-            updateMethod(nickname);
+            if (recordExists)
+                context.Update(nickname);
+            else
+                context.Insert(nickname);
 
             var reply = $" * {nicknameBefore} {replySuffix}新名字是 {nicknameAfter}";
             return reply;
