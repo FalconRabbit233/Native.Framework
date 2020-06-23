@@ -34,7 +34,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
 
             var nicknameAfter = commandResult.Groups[2].Value;
 
-            var nicknameExists = Utils.GetNickName(context, fromQQ, fromGroup, fromDiscuss, out var nickname);
+            var nicknameExists = Utils.GetNickname(context, fromQQ, fromGroup, fromDiscuss, out var nickname);
             var nicknameBefore = nickname.NicknameValue;
             nickname.NicknameValue = nicknameAfter;
 

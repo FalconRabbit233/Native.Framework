@@ -25,7 +25,7 @@ namespace xyz.presidium.dicebot.Code
                 group.Id;
         }
 
-        public static bool GetNickName(
+        public static bool GetNickname(
             SQLiteConnection context,
             QQ fromQQ,
             Group fromGroup,
