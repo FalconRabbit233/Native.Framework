@@ -10,6 +10,19 @@ namespace xyz.presidium.dicebot.Code.CQEvents
 {
     public class MessageHandler : IPrivateMessage, IGroupMessage
     {
+        private BotCore bot;
+
+        public MessageHandler(BotCore bot)
+        {
+            this.bot = bot;
+        }
+
+        public void DiscussMessage(object sender, CQDiscussMessageEventArgs e)
+        {
+            bot.RecieveMessage(e.FromQQ, e.Message, e.FromDiscuss.SendDiscussMessage, null, e.FromDiscuss);
+            e.Handler = true;
+        }
+
         public void GroupMessage(object sender, CQGroupMessageEventArgs e)
         {
             bot.RecieveMessage(e.FromQQ, e.Message, e.FromGroup.SendGroupMessage, e.FromGroup);
