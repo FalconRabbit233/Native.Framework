@@ -34,8 +34,8 @@ namespace xyz.presidium.dicebot.Code
         {
             var valid_group = GetValidGroup(fromGroup, fromDiscuss);
 
-            Func<Nickname, bool> predicate = n => n.FromGroup == valid_group && n.FromQQ == fromQQ.Id;
-            Func<Nickname, bool> globalNamePredicate = n => n.FromGroup == 0 && n.FromQQ == fromQQ.Id;
+            bool predicate(Nickname n) => n.FromGroup == valid_group && n.FromQQ == fromQQ.Id;
+            bool globalNamePredicate(Nickname n) => n.FromGroup == 0 && n.FromQQ == fromQQ.Id;
 
             var nameExists = context.Table<Nickname>().Count(predicate) > 0;
 
