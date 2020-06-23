@@ -29,7 +29,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
             if (!commandResult.Success) return null;
 
             string replySuffix;
-            Func<long, long> modifyGroup;
+            long modifiedGroup;
             bool recordExists;
 
             var nicknameAfter = commandResult.Groups[2].Value;
@@ -42,19 +42,19 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
             {
                 case 2:
                     replySuffix = "在此处的";
-                    modifyGroup = g => fromGroup.Id;
+                    modifiedGroup = Utils.GetValidGroup(fromGroup, fromDiscuss);
                     recordExists = nicknameExists;
                     break;
                 default:
                 case 1:
                     replySuffix = "的全局";
-                    modifyGroup = g => 0;
+                    modifiedGroup = 0;
                     recordExists = context.Table<Nickname>()
                         .Count(n => n.FromGroup == 0 && n.FromQQ == fromQQ.Id) > 0;
                     break;
             }
 
-            nickname.FromGroup = modifyGroup(nickname.FromGroup);
+            nickname.FromGroup = modifiedGroup;
 
             if (recordExists)
                 context.Update(nickname);
