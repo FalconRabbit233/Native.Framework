@@ -77,5 +77,26 @@ namespace xyz.presidium.dicebot.Code
 
             return diceExists;
         }
+
+        /// <summary>
+        /// 返回今日人品值，1好100坏
+        /// </summary>
+        /// <param name="fromQQ"></param>
+        /// <param name="fromGroup"></param>
+        /// <param name="fromDiscuss"></param>
+        /// <returns>1-100</returns>
+        public static int GetJrrp(QQ fromQQ, Group fromGroup, Discuss fromDiscuss)
+        {
+            var valid_group = GetValidGroup(fromGroup, fromDiscuss);
+
+            var today = TimeZoneInfo.ConvertTimeFromUtc(
+                DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("China Standard Time"));
+
+            var seed = today.Date.ToString("yyyyMMdd") + fromQQ.Id.ToString() + valid_group.ToString();
+
+            var rng = new Random(seed.GetHashCode());
+
+            return rng.Next(1, 101);
+        }
     }
 }

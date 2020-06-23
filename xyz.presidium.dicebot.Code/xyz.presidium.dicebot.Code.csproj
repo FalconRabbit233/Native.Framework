@@ -98,6 +98,7 @@
     <Compile Include="Dicebot\Controllers\DefaultDiceController.cs" />
     <Compile Include="Dicebot\Controllers\GroupSwitchController.cs" />
     <Compile Include="Dicebot\Controllers\IResponsable.cs" />
+    <Compile Include="Dicebot\Controllers\JrrpController.cs" />
     <Compile Include="Dicebot\Controllers\NicknameController.cs" />
     <Compile Include="Dicebot\Controllers\RollDiceController.cs" />
     <Compile Include="Dicebot\InviteManage.cs" />

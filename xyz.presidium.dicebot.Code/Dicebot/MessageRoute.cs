@@ -14,25 +14,17 @@ namespace xyz.presidium.dicebot.Code.Dicebot
         {
             if (routes.Count != 0) return;
 
-            RegisterRoute<RollDiceController>(s =>
-                new Regex(@"^.[rR][hH]?").IsMatch(s)
-            );
+            RegisterRoute<RollDiceController>(s => new Regex(@"^.[rR][hH]?").IsMatch(s));
 
-            RegisterRoute<CointossController>(s =>
-                new Regex(@"^.[fF]").IsMatch(s)
-            );
+            RegisterRoute<JrrpController>(s => new Regex(@"^.[jJ][rR]{2}[pP]").IsMatch(s));
 
-            RegisterRoute<NicknameController>(s =>
-                new Regex(@"^.[nN][nN]?").IsMatch(s)
-            );
+            RegisterRoute<CointossController>(s => new Regex(@"^.[fF]").IsMatch(s));
 
-            RegisterRoute<GroupSwitchController>(s =>
-                new Regex(@"^.switch").IsMatch(s)
-            );
+            RegisterRoute<NicknameController>(s => new Regex(@"^.[nN][nN]?").IsMatch(s));
 
-            RegisterRoute<DefaultDiceController>(s =>
-                new Regex(@"^.[dD]").IsMatch(s)
-            );
+            RegisterRoute<DefaultDiceController>(s => new Regex(@"^.[dD]").IsMatch(s));
+
+            RegisterRoute<GroupSwitchController>(s => new Regex(@"^.switch").IsMatch(s));
         }
 
         private BotCore RegisterRoute<T>(Predicate<string> predicate) where T : IResponsable
