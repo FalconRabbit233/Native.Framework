@@ -52,5 +52,30 @@ namespace xyz.presidium.dicebot.Code
 
             return nameExists;
         }
+
+        public static bool GetDefaultDice(
+            SQLiteConnection context,
+            QQ fromQQ,
+            Group fromGroup,
+            Discuss fromDiscuss,
+            out DefaultDice defaultDice)
+        {
+            var valid_group = GetValidGroup(fromGroup, fromDiscuss);
+
+            bool predicate(DefaultDice n) => n.FromGroup == valid_group && n.FromQQ == fromQQ.Id;
+
+            var diceExists = context.Table<DefaultDice>().Count(predicate) > 0;
+
+            defaultDice = diceExists ?
+                context.Table<DefaultDice>().First(predicate) :
+                new DefaultDice()
+                {
+                    FromGroup = valid_group,
+                    FromQQ = fromQQ.Id,
+                    DefaultDiceValue = 100
+                };
+
+            return diceExists;
+        }
     }
 }

@@ -47,7 +47,9 @@ namespace xyz.presidium.dicebot.Code.Dicebot
         {
             if (fromGroup != null &&
                 context.Table<GroupWhitelist>()
-                    .Count(g => g.enabledGroup == fromGroup.Id) < 1) return;
+                    .Count(g => g.enabledGroup == fromGroup.Id) < 1 &&
+                context.Table<SuperAdmin>()
+                    .Count(s => s.QQNumber == fromQQ.Id) < 1) return;
 
             if (message.Text[0] != '.' && message.Text[0] != '。') return;
 

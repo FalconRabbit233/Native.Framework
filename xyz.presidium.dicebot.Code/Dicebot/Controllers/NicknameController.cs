@@ -14,17 +14,17 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
 {
     public class NicknameController : IResponsable
     {
-        private static SQLiteConnection context;
+        private SQLiteConnection context;
 
         public NicknameController(SQLiteConnection context)
         {
-            NicknameController.context = context;
+            this.context = context;
         }
 
         public string Response(QQ fromQQ, QQMessage message, CqpModel.Group fromGroup, Discuss fromDiscuss)
         {
-            var renamePattern = new Regex(@"([nN][nN]?)\W*(.{0,16})");
-            var commandResult = renamePattern.Match(message.Text);
+            var pattern = new Regex(@"([nN][nN]?)\W*(.{0,16})");
+            var commandResult = pattern.Match(message.Text);
 
             if (!commandResult.Success) return null;
 

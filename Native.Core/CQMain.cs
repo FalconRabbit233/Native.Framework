@@ -23,6 +23,7 @@ namespace Native.Core
         public static void Register(IUnityContainer unityContainer)
         {
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "dicebot.sqlite");
+
             var conn = new SQLiteConnection(
                 new SQLiteConnectionString(path, false)
             );
