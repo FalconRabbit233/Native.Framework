@@ -70,24 +70,35 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
             var diceCommands = compiledDiceCommandPattern.Matches(overallResult.Groups[3].Value);
 
             Utils.GetDefaultDice(context, fromQQ, fromGroup, fromDiscuss, out var defaultDiceUpper);
+            Utils.GetNickname(context, fromQQ, fromGroup, fromDiscuss, out var nickname);
 
             var diceCommandRecovery = "";
+            var sumDiceCount = 0;
             foreach (Match c in diceCommands)
             {
                 diceCommandRecovery += c.Groups[1].Value;
                 if (c.Groups[4].Value != "")
                 {
                     diceCommandRecovery += c.Groups[4].Value;
-                    continue;
                 }
                 else
                 {
-                    diceCommandRecovery += c.Groups[2].Value == "" ? "1" : c.Groups[2].Value;
-                    diceCommandRecovery += "d";
-                    diceCommandRecovery += c.Groups[3].Value == "" ? defaultDiceUpper.DefaultDiceValue.ToString() : c.Groups[3].Value;
+                    var diceCount = int.TryParse(c.Groups[2].Value, out var validDiceCount) ?
+                        validDiceCount : 1;
+
+                    sumDiceCount += diceCount * repeatCount;
+                    if (sumDiceCount > 128) return $" * {nickname.NicknameValue} 扔了一大堆骰子，都不知道滚哪儿去了";
+
+                    var diceDim = int.TryParse(c.Groups[3].Value, out var validDiceDim) ?
+                        validDiceDim : defaultDiceUpper.DefaultDiceValue;
+
+                    if (diceDim > 256) return $" * {nickname.NicknameValue} 扔了一个球";
+
+                    diceCommandRecovery += $"{diceCount}d{diceDim}";
                 }
             }
 
+            var jrrp = Utils.GetJrrp(fromQQ, fromGroup, fromDiscuss);
             var repeatResults = new List<List<List<int>>>();
             for (int j = 0; j < repeatCount; j++)  // 3#层面的展开
             {
@@ -114,7 +125,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
 
                         for (int i = 0; i < diceCount; i++)  // 3d6层面的展开
                         {
-                            var rollResult = rng.Roll(diceUpper);
+                            var rollResult = rng.RollWithJrrp(diceUpper, jrrp);
                             commandResult.Add(SignToOperation(commandSign)(rollResult));
                         }
                     }
@@ -185,9 +196,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
                 rollCommandResult = $"{{ {repeatPlain.JoinStrings(", ")} }}";
             }
 
-            Utils.GetNickname(context, fromQQ, fromGroup, fromDiscuss, out var nickname);
-
-            var repeatDisplay = overallResult.Groups[2].Value == "" ? "" : $"{overallResult.Groups[2].Value}次";
+            var repeatDisplay = overallResult.Groups[2].Value == "" ? "" : $"{repeatCount}次";
 
             var totalResult = $" * {nickname.NicknameValue} 投掷 {overallResult.Groups[4].Value}: {repeatDisplay}{diceCommandRecovery} = {rollCommandResult}";
 

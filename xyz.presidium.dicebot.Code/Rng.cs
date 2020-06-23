@@ -28,5 +28,35 @@ namespace xyz.presidium.dicebot.Code
         {
             return rng.Next(1, upper + 1);
         }
+
+        public int RollWithJrrp(int upper, int jrrp)
+        {
+            double fr(int x)
+            {
+                double delta = Math.Round(jrrp - 50.5) * 0.035 / 50;
+                double result = ((1 - delta) / upper + delta * (x - 1) / (upper * upper)) * x;
+                return result < 1 ? result : 1.0;
+            }
+
+            var top = upper;
+            var bottom = 1;
+            const int precise = 10000;
+            var rawNumber = rng.Next(bottom, precise + 1);
+
+            while (top - bottom > 1)
+            {
+                var calcNumber = precise * fr((bottom + top) / 2);
+                if (rawNumber < precise * fr(bottom))
+                {
+                    top = bottom;
+                    break;
+                }
+
+                if (rawNumber > calcNumber) bottom = (bottom + top) / 2;
+                else top = (bottom + top) / 2;
+            }
+
+            return top;
+        }
     }
 }
