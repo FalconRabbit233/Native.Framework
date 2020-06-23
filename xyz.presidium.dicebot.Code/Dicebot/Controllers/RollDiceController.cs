@@ -71,6 +71,23 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
 
             Utils.GetDefaultDice(context, fromQQ, fromGroup, fromDiscuss, out var defaultDiceUpper);
 
+            var diceCommandRecovery = "";
+            foreach (Match c in diceCommands)
+            {
+                diceCommandRecovery += c.Groups[1].Value;
+                if (c.Groups[4].Value != "")
+                {
+                    diceCommandRecovery += c.Groups[4].Value;
+                    continue;
+                }
+                else
+                {
+                    diceCommandRecovery += c.Groups[2].Value == "" ? "1" : c.Groups[2].Value;
+                    diceCommandRecovery += "d";
+                    diceCommandRecovery += c.Groups[3].Value == "" ? defaultDiceUpper.DefaultDiceValue.ToString() : c.Groups[3].Value;
+                }
+            }
+
             var repeatResults = new List<List<List<int>>>();
             for (int j = 0; j < repeatCount; j++)  // 3#层面的展开
             {
@@ -170,7 +187,9 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
 
             Utils.GetNickname(context, fromQQ, fromGroup, fromDiscuss, out var nickname);
 
-            var totalResult = $" * {nickname.NicknameValue} 投掷 {overallResult.Groups[4].Value}: {overallResult.Groups[3].Value} = {rollCommandResult}";
+            var repeatDisplay = overallResult.Groups[2].Value == "" ? "" : $"{overallResult.Groups[2].Value}次";
+
+            var totalResult = $" * {nickname.NicknameValue} 投掷 {overallResult.Groups[4].Value}: {repeatDisplay}{diceCommandRecovery} = {rollCommandResult}";
 
             if (overallResult.Groups[1].Value != "")
             {
