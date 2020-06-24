@@ -94,6 +94,7 @@
     <Compile Include="CQEvents\FriendsHandler.cs" />
     <Compile Include="CQEvents\MessageHandler.cs" />
     <Compile Include="Dicebot\BotCore.cs" />
+    <Compile Include="Dicebot\Controllers\Coc7Controller.cs" />
     <Compile Include="Dicebot\Controllers\CointossController.cs" />
     <Compile Include="Dicebot\Controllers\DefaultDiceController.cs" />
     <Compile Include="Dicebot\Controllers\GroupSwitchController.cs" />

@@ -27,8 +27,8 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
 
         public string Response(QQ fromQQ, QQMessage message, CqpModel.Group fromGroup, Discuss fromDiscuss)
         {
-            var renamePattern = new Regex(@"[fF]\W*(.*)");
-            var commandResult = renamePattern.Match(message.Text);
+            var pattern = new Regex(@"[fF]\W*(.*)");
+            var commandResult = pattern.Match(message.Text);
 
             if (!commandResult.Success) return null;
 

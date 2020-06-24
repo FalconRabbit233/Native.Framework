@@ -51,7 +51,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
                 // group 1: h, 2: (x)#, 3: 3d6+1d3+5+d+2d+d8, 4: 注释
                 compiledOverallPattern
                     = new Regex(
-                        @"[rR]([hH]?)\s*(?:(\d+)#)?((?:[+-]?(?:(?:\d*d\d*)|(?:\d+)))+)\s*(.+?)?$",
+                        @"[rR]([hH]?)\s*(?:(\d+)#)?((?:[+-]?(?:(?:\d*[dD]\d*)|(?:\d+)))+)\s*(.+?)?$",
                         RegexOptions.Compiled);
             }
 
@@ -65,7 +65,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
             if (compiledDiceCommandPattern == null)
                 // 1: [+-null], 2: (x)d6, 3: 2d(x), 4: 整数
                 compiledDiceCommandPattern
-                    = new Regex(@"([+-]?)(?:(?:(\d*)d(\d*))|(\d+))", RegexOptions.Compiled);
+                    = new Regex(@"([+-]?)(?:(?:(\d*)[dD](\d*))|(\d+))", RegexOptions.Compiled);
 
             var diceCommands = compiledDiceCommandPattern.Matches(overallResult.Groups[3].Value);
 
