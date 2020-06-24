@@ -101,6 +101,7 @@
     <Compile Include="Dicebot\Controllers\JrrpController.cs" />
     <Compile Include="Dicebot\Controllers\NicknameController.cs" />
     <Compile Include="Dicebot\Controllers\RollDiceController.cs" />
+    <Compile Include="Dicebot\Controllers\RppkController.cs" />
     <Compile Include="Dicebot\InviteManage.cs" />
     <Compile Include="Dicebot\MessageRoute.cs" />
     <Compile Include="Dicebot\Models\DefaultDice.cs" />

@@ -24,7 +24,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
             Utils.GetNickname(context, fromQQ, fromGroup, fromDiscuss, out var nickname);
 
             var jrrp = Utils.GetJrrp(fromQQ, fromGroup, fromDiscuss);
-            return $" * {nickname.NicknameValue} 今天在此处的人品值是 {100 - jrrp}%";
+            return $" * {nickname.NicknameValue} 今天在此处的人品值是 {101 - jrrp}%";
         }
     }
 }

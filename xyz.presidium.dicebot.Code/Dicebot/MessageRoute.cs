@@ -14,9 +14,11 @@ namespace xyz.presidium.dicebot.Code.Dicebot
         {
             if (routes.Count != 0) return;
 
-            RegisterRoute<RollDiceController>(s => new Regex(@"^.[rR][hH]?").IsMatch(s));
+            RegisterRoute<RollDiceController>(s => new Regex(@"^.[rR][hH]?[^p]").IsMatch(s));
 
             RegisterRoute<JrrpController>(s => new Regex(@"^.[jJ][rR]{2}[pP]").IsMatch(s));
+
+            RegisterRoute<RppkController>(s => new Regex(@"^.[rR][pP]{2}[kK]").IsMatch(s));
 
             RegisterRoute<CointossController>(s => new Regex(@"^.[fF]").IsMatch(s));
 
