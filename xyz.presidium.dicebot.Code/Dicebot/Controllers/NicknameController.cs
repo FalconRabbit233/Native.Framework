@@ -61,8 +61,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
             else
                 context.Insert(nickname);
 
-            var reply = $" * {nicknameBefore} {replySuffix}新名字是 {nicknameAfter}";
-            return reply;
+            return $" * {nicknameBefore} {replySuffix}新名字是 {nicknameAfter}";
         }
     }
 }

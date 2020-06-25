@@ -43,8 +43,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
             var coinSide = rng.Next(2) == 0 ? "反面" : "正面";
 
             //输出字符串
-            var reply = $" * {nicknameCurrent} 投掷硬币 {Event}：{coinSide}";
-            return reply;
+            return $" * {nicknameCurrent} 投掷硬币 {Event}：{coinSide}";
         }
     }
 }

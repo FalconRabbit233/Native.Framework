@@ -14,27 +14,30 @@ namespace xyz.presidium.dicebot.Code.Dicebot
         {
             if (routes.Count != 0) return;
 
-            RegisterRoute<RollDiceController>(s => new Regex(@"^.[rR][hH]?[^p]").IsMatch(s));
+            RegisterRoute<RollDiceController>(s => Regex.Match(s, @"^.[rR][hH]?[^p]").Success);
 
-            RegisterRoute<JrrpController>(s => new Regex(@"^.[jJ][rR]{2}[pP]").IsMatch(s));
+            RegisterRoute<JrrpController>(s => Regex.Match(s, @"^.[jJ][rR]{2}[pP]").Success);
 
-            RegisterRoute<RppkController>(s => new Regex(@"^.[rR][pP]{2}[kK]").IsMatch(s));
+            RegisterRoute<RppkController>(s => Regex.Match(s, @"^.[rR][pP]{2}[kK]").Success);
 
-            RegisterRoute<Coc7Controller>(s => new Regex(@"^.[cC][oO][cC]7").IsMatch(s));
+            RegisterRoute<Coc7Controller>(s => Regex.Match(s, @"^.[cC][oO][cC]7").Success);
 
-            RegisterRoute<CointossController>(s => new Regex(@"^.[fF]").IsMatch(s));
+            RegisterRoute<CointossController>(s => Regex.Match(s, @"^.[fF]").Success);
 
-            RegisterRoute<NicknameController>(s => new Regex(@"^.[nN][nN]?").IsMatch(s));
+            RegisterRoute<ActionController>(s => Regex.Match(s, @"^.[aA]").Success);
 
-            RegisterRoute<DefaultDiceController>(s => new Regex(@"^.[dD]").IsMatch(s));
+            RegisterRoute<RumorController>(s => Regex.Match(s, @"^.[uU]").Success);
 
-            RegisterRoute<GroupSwitchController>(s => new Regex(@"^.switch").IsMatch(s));
+            RegisterRoute<NicknameController>(s => Regex.Match(s, @"^.[nN][nN]?").Success);
+
+            RegisterRoute<DefaultDiceController>(s => Regex.Match(s, @"^.[dD]").Success);
+
+            RegisterRoute<GroupSwitchController>(s => Regex.Match(s, @"^.switch").Success);
         }
 
-        private BotCore RegisterRoute<T>(Predicate<string> predicate) where T : IResponsable
+        private void RegisterRoute<T>(Predicate<string> predicate) where T : IResponsable
         {
             routes.Add(new Tuple<Predicate<string>, Type>(predicate, typeof(T)));
-            return this;
         }
 
         private Type Route(string message)

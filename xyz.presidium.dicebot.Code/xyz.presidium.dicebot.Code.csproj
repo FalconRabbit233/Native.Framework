@@ -94,6 +94,7 @@
     <Compile Include="CQEvents\FriendsHandler.cs" />
     <Compile Include="CQEvents\MessageHandler.cs" />
     <Compile Include="Dicebot\BotCore.cs" />
+    <Compile Include="Dicebot\Controllers\ActionController.cs" />
     <Compile Include="Dicebot\Controllers\Coc7Controller.cs" />
     <Compile Include="Dicebot\Controllers\CointossController.cs" />
     <Compile Include="Dicebot\Controllers\DefaultDiceController.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Dicebot\Controllers\NicknameController.cs" />
     <Compile Include="Dicebot\Controllers\RollDiceController.cs" />
     <Compile Include="Dicebot\Controllers\RppkController.cs" />
+    <Compile Include="Dicebot\Controllers\RumorController.cs" />
     <Compile Include="Dicebot\InviteManage.cs" />
     <Compile Include="Dicebot\MessageRoute.cs" />
     <Compile Include="Dicebot\Models\DefaultDice.cs" />
