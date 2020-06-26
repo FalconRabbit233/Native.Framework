@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
+using xyz.presidium.dicebot.Code.Dicebot;
 
 namespace xyz.presidium.dicebot.Code.CQEvents
 {
-    public class MessageHandler : IPrivateMessage, IGroupMessage
+    public class MessageHandler : IPrivateMessage, IGroupMessage, IDiscussMessage
     {
         private BotCore bot;
 
