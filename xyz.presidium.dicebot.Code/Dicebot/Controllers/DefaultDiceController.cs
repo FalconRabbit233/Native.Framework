@@ -29,6 +29,9 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
             var diceExists = Utils.GetDefaultDice(context, fromQQ, fromGroup, fromDiscuss, out var defaultDice);
 
             var diceAfter = int.Parse(commandResult.Groups[1].Value);
+
+            if (diceAfter > 256) return null;
+
             var diceBefore = defaultDice.DefaultDiceValue;
 
             defaultDice.DefaultDiceValue = diceAfter;
