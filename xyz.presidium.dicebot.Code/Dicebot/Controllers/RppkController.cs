@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using xyz.presidium.dicebot.Code.Dicebot.Sqlite;
+using Native.Sdk.Cqp;
+using xyz.presidium.dicebot.Code.Dicebot.Models;
 
 namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
 {
@@ -13,9 +15,12 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
     {
         private SQLiteConnection context;
 
-        public RppkController(SQLiteConnection context)
+        private Rng rng;
+
+        public RppkController(SQLiteConnection context, Rng rng)
         {
             this.context = context;
+            this.rng = rng;
         }
 
         public string Response(QQ fromQQ, QQMessage message, CqpModel.Group fromGroup, Discuss fromDiscuss)
@@ -67,7 +72,62 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
 
             Utils.GetNickname(context, chanllenger, fromGroup, fromDiscuss, out var cNickname);
             Utils.GetNickname(context, target, fromGroup, fromDiscuss, out var tNickname);
-            return $" * {cNickname.NicknameValue}({cJrrp}%) 挑战 {tNickname.NicknameValue}({tJrrp}%)：{jrrpReview}({jrrpResult})";
+
+            var resultText = $" * {cNickname.NicknameValue}({cJrrp}%) 挑战 {tNickname.NicknameValue}({tJrrp}%)：{jrrpReview}({jrrpResult})";
+
+            var validGroup = Utils.GetValidGroup(fromGroup, fromDiscuss);
+            var selfMemberType = fromQQ.CQApi.GetGroupMemberInfo(validGroup, fromQQ.CQApi.GetLoginQQ().Id).MemberType;
+            var targetMemberType = fromQQ.CQApi.GetGroupMemberInfo(validGroup, target.Id).MemberType;
+
+            if (validGroup != 0L && fromGroup != null && (int)selfMemberType > (int)targetMemberType)
+            {
+                fromQQ.CQApi.SendGroupMessage(validGroup, resultText);
+
+                bool wherePrisoner(PrisonTime p) => p.FromGroup == validGroup && p.FromQQ == target.Id;
+                PrisonTime prisonTime;
+
+                // 初始化计数对象
+                if (context.Table<PrisonTime>().Count(wherePrisoner) < 1)
+                {
+                    prisonTime = new PrisonTime() { FromGroup = validGroup, FromQQ = target.Id, PrisonTimeValue = 0 };
+                    context.Insert(prisonTime);
+                }
+                else
+                {
+                    prisonTime = context.Table<PrisonTime>().First(wherePrisoner);
+                }
+
+                int banSecs = jrrpResult * 30;
+
+                // 执行禁言
+                var exeLines = context.Table<ExecutionLine>().ToArray();
+                var exeText = string.Format(
+                    exeLines[rng.Roll(exeLines.Length) - 1].Content,
+                    cNickname.NicknameValue,
+                    tNickname.NicknameValue,
+                    banSecs,
+                    prisonTime.PrisonTimeValue
+                    ) + $" ({prisonTime.PrisonTimeValue}+{banSecs})";
+
+                var exeTextResult = fromQQ.CQApi.SendGroupMessage(validGroup, exeText);
+
+                if (fromQQ.CQApi.SetGroupMemberBanSpeak(validGroup, target, TimeSpan.FromSeconds(banSecs)))
+                {
+                    prisonTime.PrisonTimeValue += banSecs;
+                    context.Update(prisonTime);
+                }
+                else if (exeTextResult.IsSuccess)
+                {
+                    fromQQ.CQApi.RemoveMessage(exeTextResult.Id);
+                }
+
+                return null;
+            }
+            else
+            {
+                return resultText;
+            }
+
         }
     }
 }

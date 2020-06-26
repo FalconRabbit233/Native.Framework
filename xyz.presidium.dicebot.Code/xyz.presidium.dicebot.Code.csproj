@@ -109,8 +109,10 @@
     <Compile Include="Dicebot\InviteManage.cs" />
     <Compile Include="Dicebot\MessageRoute.cs" />
     <Compile Include="Dicebot\Models\DefaultDice.cs" />
+    <Compile Include="Dicebot\Models\ExecutionLine.cs" />
     <Compile Include="Dicebot\Models\GroupWhitelist.cs" />
     <Compile Include="Dicebot\Models\Nickname.cs" />
+    <Compile Include="Dicebot\Models\PrisonTime.cs" />
     <Compile Include="Dicebot\Models\SuperAdmin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rng.cs" />
