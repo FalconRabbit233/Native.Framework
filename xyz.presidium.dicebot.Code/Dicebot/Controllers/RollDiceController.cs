@@ -79,6 +79,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
                 diceCommandRecovery += c.Groups[1].Value;
                 if (c.Groups[4].Value != "")
                 {
+                    if (c.Groups[4].Value.Length > 8) return $" * {nickname.NicknameValue} 说了个天文数字，把骰子机都搞晕了";
                     diceCommandRecovery += c.Groups[4].Value;
                 }
                 else
