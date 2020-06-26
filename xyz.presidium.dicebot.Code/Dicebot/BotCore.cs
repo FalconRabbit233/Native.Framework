@@ -21,7 +21,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot
 
         private IUnityContainer container;
 
-        private static List<Tuple<Predicate<string>, Type>> routes;
+        public static List<Tuple<Predicate<string>, Type>> routes;
 
         public BotCore(SQLiteConnection context, IUnityContainer container)
         {

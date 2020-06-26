@@ -32,6 +32,8 @@ namespace xyz.presidium.dicebot.Code.Dicebot
 
             RegisterRoute<DefaultDiceController>(s => Regex.Match(s, @"^.[dD]").Success);
 
+            RegisterRoute<HelpController>(s => Regex.Match(s, @"^.[hH]").Success);
+
             RegisterRoute<GroupSwitchController>(s => Regex.Match(s, @"^.switch").Success);
         }
 
