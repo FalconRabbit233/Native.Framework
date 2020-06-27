@@ -79,7 +79,9 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
             var selfMemberType = fromQQ.CQApi.GetGroupMemberInfo(validGroup, fromQQ.CQApi.GetLoginQQ().Id).MemberType;
             var targetMemberType = fromQQ.CQApi.GetGroupMemberInfo(validGroup, target.Id).MemberType;
 
-            if (validGroup != 0L && fromGroup != null && (int)selfMemberType > (int)targetMemberType)
+            if (validGroup != 0L && fromGroup != null &&
+                (int)selfMemberType > (int)targetMemberType &&
+                jrrpResult > 0)
             {
                 fromQQ.CQApi.SendGroupMessage(validGroup, resultText);
 
@@ -97,8 +99,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
                     prisonTime = context.Table<PrisonTime>().First(wherePrisoner);
                 }
 
-                int banSecs = jrrpResult * 30;
-
+                int banSecs = 7200 / (100 - jrrpResult);
                 // 执行禁言
                 var exeLines = context.Table<ExecutionLine>().ToArray();
                 var exeText = string.Format(
