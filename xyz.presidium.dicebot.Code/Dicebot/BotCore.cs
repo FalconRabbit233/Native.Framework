@@ -38,7 +38,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot
         /// <param name="callback">回复函数</param>
         /// <param name="fromGroup">群对象</param>
         /// <param name="fromDiscusss">讨论组对象</param>
-        public void RecieveMessage(
+        public bool RecieveMessage(
             QQ fromQQ,
             QQMessage message,
             ReplyMethod callback,
@@ -49,22 +49,23 @@ namespace xyz.presidium.dicebot.Code.Dicebot
                 context.Table<GroupWhitelist>()
                     .Count(g => g.enabledGroup == fromGroup.Id) < 1 &&
                 context.Table<SuperAdmin>()
-                    .Count(s => s.QQNumber == fromQQ.Id) < 1) return;
+                    .Count(s => s.QQNumber == fromQQ.Id) < 1) return false;
 
-            if (message.Text[0] != '.' && message.Text[0] != '。') return;
+            if (message.Text[0] != '.' && message.Text[0] != '。') return false;
 
             RouteInit();
 
             var controller = Route(message.Text);
 
-            if (controller == null) return;
+            if (controller == null) return false;
 
             var response = ((IResponsable)container.Resolve(controller))
                 .Response(fromQQ, message, fromGroup, fromDiscusss);
 
-            if (response == null) return;
+            if (response == null) return false;
 
             callback(response);
+            return true;
         }
     }
 }

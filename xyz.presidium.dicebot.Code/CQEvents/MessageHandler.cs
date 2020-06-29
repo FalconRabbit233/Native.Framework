@@ -20,20 +20,17 @@ namespace xyz.presidium.dicebot.Code.CQEvents
 
         public void DiscussMessage(object sender, CQDiscussMessageEventArgs e)
         {
-            bot.RecieveMessage(e.FromQQ, e.Message, e.FromDiscuss.SendDiscussMessage, null, e.FromDiscuss);
-            e.Handler = true;
+            e.Handler = bot.RecieveMessage(e.FromQQ, e.Message, e.FromDiscuss.SendDiscussMessage, null, e.FromDiscuss);
         }
 
         public void GroupMessage(object sender, CQGroupMessageEventArgs e)
         {
-            bot.RecieveMessage(e.FromQQ, e.Message, e.FromGroup.SendGroupMessage, e.FromGroup);
-            e.Handler = true;
+            e.Handler = bot.RecieveMessage(e.FromQQ, e.Message, e.FromGroup.SendGroupMessage, e.FromGroup);
         }
 
         public void PrivateMessage(object sender, CQPrivateMessageEventArgs e)
         {
-            bot.RecieveMessage(e.FromQQ, e.Message, e.FromQQ.SendPrivateMessage);
-            e.Handler = true;
+            e.Handler = bot.RecieveMessage(e.FromQQ, e.Message, e.FromQQ.SendPrivateMessage);
         }
     }
 }
