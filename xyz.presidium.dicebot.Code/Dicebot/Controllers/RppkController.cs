@@ -60,13 +60,13 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
             var jrrpResult = cJrrp - tJrrp;
 
             string jrrpReview;
-            if (jrrpResult > 50) jrrpReview = "史诗大捷";
-            else if (jrrpResult > 25) jrrpReview = "酣畅大胜";
-            else if (jrrpResult > 10) jrrpReview = "略处上风";
+            if (jrrpResult > 75) jrrpReview = "史诗大捷";
+            else if (jrrpResult > 50) jrrpReview = "酣畅大胜";
+            else if (jrrpResult > 25) jrrpReview = "略处上风";
             else if (jrrpResult > 5) jrrpReview = "血战险胜";
             else if (jrrpResult > -5) jrrpReview = "平分秋色";
-            else if (jrrpResult > -10) jrrpReview = "血战惜败";
-            else if (jrrpResult > -25) jrrpReview = "略处下风";
+            else if (jrrpResult > -25) jrrpReview = "血战惜败";
+            else if (jrrpResult > -50) jrrpReview = "略处下风";
             else jrrpReview = "悲惨失败";
 
 
