@@ -20,6 +20,8 @@ namespace xyz.presidium.dicebot.Code.Dicebot
 
             RegisterRoute<RppkController>(s => Regex.Match(s, @"^.[rR][pP]{2}[kK]").Success);
 
+            RegisterRoute<RpArenaController>(s => Regex.Match(s, @"^.[rR][pP][aA]").Success);
+
             RegisterRoute<Coc7Controller>(s => Regex.Match(s, @"^.[cC][oO][cC]7").Success);
 
             RegisterRoute<CointossController>(s => Regex.Match(s, @"^.[fF]").Success);
