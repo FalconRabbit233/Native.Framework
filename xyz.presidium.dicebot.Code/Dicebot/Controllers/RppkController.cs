@@ -89,7 +89,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot.Controllers
                 PrisonTime prisonTime;
 
                 // 初始化计数对象
-                if (context.Table<PrisonTime>().Count(wherePrisoner) < 1)
+                if (!context.Table<PrisonTime>().Any(wherePrisoner))
                 {
                     prisonTime = new PrisonTime() { FromGroup = validGroup, FromQQ = target.Id, PrisonTimeValue = 0 };
                     context.Insert(prisonTime);

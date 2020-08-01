@@ -45,6 +45,7 @@ namespace xyz.presidium.dicebot.Code.Dicebot
             CqpModel.Group fromGroup = null,
             Discuss fromDiscusss = null)
         {
+            if (message.Text == "") return false;
             if (fromGroup != null &&
                 context.Table<GroupWhitelist>()
                     .Count(g => g.enabledGroup == fromGroup.Id) < 1 &&
